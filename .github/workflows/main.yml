@@ -1,0 +1,92 @@
+name: Deploy Anything via FTP - Complete Documentary Workflow
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on pushes to the 'main' branch (adjust as needed)
+
+jobs:
+  web-deploy:
+    name: 🎉 Automated FTP Deployment Workflow
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for compatibility and speed
+
+    steps:
+      # Step 1: Retrieve the latest code from your repository
+      - name: 🚚 Get the Latest Code
+        # Uses the official checkout action to clone your repository
+        uses: actions/checkout@v4
+        # This step ensures that the latest code is available in the runner environment for deployment
+
+      # Step 2: Optional - Set up Node.js environment if your build requires it
+      # Uncomment and customize if you are building your project before deploying
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '16' # Specify your Node.js version
+
+      # Step 3: Optional - Build your project before deployment
+      # Example for React, Vue, Angular, or other frameworks
+      # Uncomment and adjust the commands as per your project needs
+      # - name: Build Project
+      #   run: |
+      #     npm install
+      #     npm run build
+
+      # Step 4: Synchronize Files to the FTP Server
+      - name: 📂 Sync Files to FTP Server
+        # Utilizing the popular SamKirkland FTP Deploy Action
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          # Server address where your website or files will be uploaded
+          server: ${{ secrets.FTP_SERVER }}  # Store your server address securely in GitHub Secrets
+          
+          # FTP username for authentication
+          username: ${{ secrets.FTP_USERNAME }}  # Store your username securely
+          
+          # FTP password for authentication
+          password: ${{ secrets.FTP_PASSWORD }}  # Store your password securely
+          
+          # (Optional) Specify a custom port if your server uses a non-standard port
+          # port: 21 # Default FTP port; replace if necessary
+          
+          # (Optional) Use FTPS for encrypted transfer for added security
+          # protocol: ftps
+          
+          # (Optional) Specify the local directory to upload
+          # default is root of the repository './'
+          # local-dir: ./dist/
+          
+          # (Optional) Specify the destination directory on the server
+          # default is the root directory
+          server-dir: ./htdocs/  # Adjust this to match your server's directory structure
+
+          # (Optional) Enable dry-run mode for testing what files would be uploaded
+          # dry-run: false
+
+          # (Optional) Define files or folders to exclude from deployment
+          # exclude: |
+          #   **/.git*
+          #   **/node_modules/**
+          #   secrets.txt
+
+          # (Optional) Set logging levels for detailed output
+          # log-level: standard
+
+          # (Optional) Set connection security and timeout options
+          # security: strict
+          # timeout: 60000  # in milliseconds
+
+# Additional notes:
+# - Make sure to add your FTP credentials as secrets in your GitHub repository:
+#   * FTP_SERVER
+#   * FTP_USERNAME
+#   * FTP_PASSWORD
+# - Adjust 'server-dir' to match your server's directory where files should be uploaded
+# - For secure transfers, consider switching to FTPS by uncommenting 'protocol: ftps'
+
+# Explanation:
+# This workflow automates the deployment process triggered by a push to the 'main' branch.
+# It fetches the latest code, optionally builds your project, and then uploads the files via FTP.
+# Using secrets enhances security by avoiding plaintext credentials in your workflow files.
+# You can customize the 'exclude' list to prevent uploading sensitive or unnecessary files.
+# The 'dry-run' option helps verify changes without actual file modifications.
