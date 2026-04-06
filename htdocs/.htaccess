@@ -1,0 +1,9 @@
+php_value display_errors On
+php_value date.timezone Asia/Makassar
+ErrorDocument 404 https://flessan.pages.dev/error/404
+Redirect 301 /gauntlet https://frgd.ps.fhgdps.com/gauntlet
+ErrorDocument 403 https://flessan.pages.dev/error/403
+ErrorDocument 400 https://flessan.pages.dev/error/400
+ErrorDocument 401 https://flessan.pages.dev/error/401
+ErrorDocument 500 https://flessan.pages.dev/error/500
+ErrorDocument 503 https://flessan.pages.dev/error/503

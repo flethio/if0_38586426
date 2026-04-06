@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panduan P3K Interaktif untuk Pemula dan PMR. Siap, Tanggap, Selamatkan.">
+    <title>P3K Siaga - Panduan Pertolongan Pertama</title>
+
+    <!-- PWA Manifest Simulation (Meta Tags) -->
+    <meta name="theme-color" content="#e63946">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Icons (Menggunakan SVG inline di body untuk performa offline) -->
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #e63946;
+            /* Merah PMR */
+            --primary-dark: #b92b36;
+            --secondary: #457b9d;
+            /* Biru Medis */
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-main: #1d3557;
+            --text-muted: #6c757d;
+            --success: #2a9d8f;
+            --warning: #e9c46a;
+            --danger: #d00000;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+            padding-bottom: 80px;
+            /* Space for bottom nav on mobile */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.1s, opacity 0.2s;
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--text-muted);
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--bg-card);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* --- SEARCH --- */
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: var(--bg-body);
+            color: var(--text-main);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: var(--text-muted);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            display: none;
+            padding-top: 1rem;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* --- DISCLAIMER --- */
+        .disclaimer-box {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.8rem;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            border-left: 5px solid #ffc107;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+        }
+
+        /* --- CARDS (GUIDES) --- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            fill: var(--primary);
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            /* Bottom sheet style on mobile */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .modal-overlay {
+                align-items: center;
+            }
+
+            .modal-content {
+                border-radius: var(--radius);
+                transform: translateY(20px);
+            }
+
+            .modal-overlay.open .modal-content {
+                transform: translateY(0);
+            }
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #f0f0f0;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- STEPS IN MODAL --- */
+        .step-list {
+            list-style: none;
+            counter-reset: step;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 1.8rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .dont-block {
+            background-color: #ffebeb;
+            border: 1px solid #ffcccc;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-top: 1.5rem;
+        }
+
+        .dont-title {
+            color: var(--danger);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* --- 5B / PROTOCOL --- */
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .protocol-item {
+            background: var(--bg-card);
+            padding: 1rem 0.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .protocol-letter {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .protocol-desc {
+            font-size: 0.8rem;
+        }
+
+        /* --- CHECKLIST --- */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .checklist-item input {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+        }
+
+        .progress-container {
+            background: #ddd;
+            height: 10px;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--success);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* --- QUIZ --- */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-card);
+            border: 2px solid #eee;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #f8f9fa;
+            border-color: var(--secondary);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius);
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback-wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* --- NAVIGATION (BOTTOM) --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            z-index: 90;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            flex: 1;
+            padding: 0.5rem;
+        }
+
+        .nav-item svg {
+            display: block;
+            margin: 0 auto 4px;
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- CONTACTS --- */
+        .contact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .call-btn {
+            background: var(--success);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* --- DARK MODE TOGGLE --- */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                    </svg>
+                    <span>P3K Siaga</span>
+                </div>
+                <button class="theme-toggle" id="themeBtn" aria-label="Ganti Tema">
+                    <!-- Icon Sun/Moon handled by JS -->
+                    <span>🌙</span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                </svg>
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari: Mimisan, Luka Bakar...">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- GLOBAL DISCLAIMER -->
+        <div class="disclaimer-box">
+            <svg style="width:20px;height:20px;flex-shrink:0" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" />
+            </svg>
+            <span><strong>PENTING:</strong> Website ini adalah panduan edukasi. Segera hubungi tenaga medis profesional
+                (Ambulans/RS) untuk situasi gawat darurat.</span>
+        </div>
+
+        <!-- SECTION: HOME & DRSABCD -->
+        <section id="home" class="active fade-in">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1>Tetap Tenang</h1>
+                <p>Ikuti protokol 5B (DRSABCD) sebelum melakukan tindakan spesifik.</p>
+                <button class="btn btn-primary" onclick="showModal('modal-5b')">Lihat Protokol 5B</button>
+            </div>
+
+            <h2>Panduan Kasus Umum</h2>
+            <div class="grid-cards" id="guideContainer">
+                <!-- Cards injected by JS -->
+            </div>
+        </section>
+
+        <!-- SECTION: CHECKLIST -->
+        <section id="checklist" class="fade-in">
+            <h2>Kesiapan Kotak P3K</h2>
+            <p>Cek perlengkapan Anda secara berkala.</p>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+
+            <div id="checklistContainer">
+                <!-- Checklist items injected by JS -->
+            </div>
+
+            <button class="btn btn-outline" style="width:100%; margin-top:1rem;" id="resetChecklist">Reset
+                Checklist</button>
+        </section>
+
+        <!-- SECTION: QUIZ -->
+        <section id="quiz" class="fade-in">
+            <h2>Evaluasi Pengetahuan</h2>
+            <div id="quizContainer">
+                <!-- Quiz injected by JS -->
+            </div>
+            <div id="quizResult" class="hidden" style="text-align: center; margin-top: 2rem;">
+                <h3>Nilai Kamu</h3>
+                <p style="font-size: 3rem; font-weight: bold; color: var(--primary);" id="scoreDisplay">0</p>
+                <button class="btn btn-secondary" onclick="renderQuiz()">Ulangi Kuis</button>
+            </div>
+        </section>
+
+        <!-- SECTION: CONTACTS -->
+        <section id="contacts" class="fade-in">
+            <h2>Kontak Darurat</h2>
+            <p>Simpan nomor ini di HP Anda.</p>
+
+            <div class="contact-row">
+                <div>
+                    <strong>112 / 119</strong>
+                    <div style="font-size:0.8rem">Nomor Panggilan Darurat Nasional & Ambulans</div>
+                </div>
+                <a href="tel:112" class="call-btn">Hubungi</a>
+            </div>
+
+            <div class="contact-row">
+                <div>
+                    <strong>PMI Pusat</strong>
+                    <div style="font-size:0.8rem">Palang Merah Indonesia</div>
+                </div>
+                <a href="tel:0217992325" class="call-btn">Hubungi</a>
+            </div>
+
+            <div class="contact-row">
+                <div>
+                    <strong>BAPETEN</strong>
+                    <div style="font-size:0.8rem">Kedaruratan Nuklir (021-7657361)</div>
+                </div>
+                <a href="tel:0217657361" class="call-btn">Hubungi</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home', this)">
+            <svg viewBox="0 0 24 24">
+                <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+            </svg>
+            Beranda
+        </div>
+        <div class="nav-item" onclick="switchTab('checklist', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19M11,17H13V13H17V11H13V7H11V11H7V13H11V17Z" />
+            </svg>
+            Perlengkapan
+        </div>
+        <div class="nav-item" onclick="switchTab('quiz', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M16.5,8L11,13.5L7.5,10L8.91,8.59L11,10.67L15.09,6.59L16.5,8Z" />
+            </svg>
+            Kuis
+        </div>
+        <div class="nav-item" onclick="switchTab('contacts', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" />
+            </svg>
+            Kontak
+        </div>
+    </nav>
+
+    <!-- MODALS (Hidden by default) -->
+
+    <!-- Modal 5B -->
+    <div class="modal-overlay" id="modal-5b">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-5b')">&times;</button>
+            <h2>Protokol 5B</h2>
+            <p>Langkah awal penilaian situasi.</p>
+
+            <div class="protocol-grid">
+                <div class="protocol-item">
+                    <span class="protocol-letter">B</span>
+                    <span class="protocol-desc">Bahaya</span>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-letter">B</span>
+                    <span class="protocol-desc">Beri Bantuan</span>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-letter">B</span>
+                    <span class="protocol-desc">Bantuan Hidup</span>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-letter">B</span>
+                    <span class="protocol-desc">Biarkan</span>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-letter">B</span>
+                    <span class="protocol-desc">Bawa</span>
+                </div>
+            </div>
+
+            <ul class="step-list">
+                <li><strong>Bahaya:</strong> Amankan area. Pastikan tidak ada bahaya listrik, api, atau kemacetan lalu
+                    lintas.</li>
+                <li><strong>Beri Bantuan:</strong> Periksa kesadaran korban. "Halo, apa kabar? Buka mata Anda!"</li>
+                <li><strong>Bantuan Hidup Dasar:</strong> Jika tidak sadar, cek pernapasan dan detak jantung (Pernapasan
+                    & Sirkulasi). Lakukan CPR/Bantuan Hidup Dasar jika perlu.</li>
+                <li><strong>Biarkan:</strong> Jika korban sadar dan tidak ada patah tulang serius, biarkan dalam posisi
+                    nyaman sampai bantuan datang.</li>
+                <li><strong>Bawa:</strong> Jika fasilitas medis jauh dan kondisi memungkinkan, evakuasi dengan benar.
+                    Jangan dipindah jika dicurigai cedera tulang belakang.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Detail Modal (Dynamic Content) -->
+    <div class="modal-overlay" id="modal-detail">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-detail')">&times;</button>
+            <h2 id="detailTitle">Judul</h2>
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA CONTENT ---
+        const guides = [
+            {
+                id: 'luka',
+                title: 'Luka Ringan',
+                icon: '<path d="M10,2A8,8 0 0,1 18,10A8,8 0 0,1 10,18A8,8 0 0,1 2,10A8,8 0 0,1 10,2M10,4A6,6 0 0,0 4,10A6,6 0 0,0 10,16A6,6 0 0,0 16,10A6,6 0 0,0 10,4M10,6A4,4 0 0,1 14,10A4,4 0 0,1 10,14A4,4 0 0,1 6,10A4,4 0 0,1 10,6Z"/>',
+                steps: [
+                    'Cuci tangan dengan sabun dan air mengalir (gunakan sarung tangan jika tersedia).',
+                    'Tekan luka dengan kasa bersih atau kain untuk menghentikan pendarahan.',
+                    'Bersihkan luka di bawah air mengalir yang bersih untuk membuang kotoran.',
+                    'Oleskan antiseptik (seperti povidone iodine) di sekitar luka, jangan langsung di dalam luka yang terbuka lebar.',
+                    'Tutup luka dengan plester atau kasa steril.'
+                ],
+                donts: [
+                    'Jangan menghembus napas ke luka.',
+                    'Jangan menempelkan kapas karena seratnya bisa tertinggal.',
+                    'Jangan menggosok luka terlalu keras.'
+                ]
+            },
+            {
+                id: 'mimisan',
+                title: 'Mimisan',
+                icon: '<path d="M12,2C14.4,6.3 16,10.3 16,14C16,17.3 13.3,20 10,20C6.7,20 4,17.3 4,14C4,10.3 5.6,6.3 8,2H12Z"/>',
+                steps: [
+                    'Dudukkan korban dengan posisi badan sedikit condong ke depan. JANGAN TELUNGKUP.',
+                    'Jepit hidung bagian bawah (tulang rawan lunak) dengan jari tangan dan jari telunjuk.',
+                    'Tahan jepitan selama 5-10 menit tanpa melepaskannya untuk melihat.',
+                    'Bernapas lewat mulut selama penjepitan.'
+                ],
+                donts: [
+                    'Jangan memiringkan kepala ke belakang (darah bisa masuk ke tenggorokan dan menyebabkan muntah/tersumbat).',
+                    'Jangan memasukkan tisu atau kapas ke dalam hidung.'
+                ]
+            },
+            {
+                id: 'bakar',
+                title: 'Luka Bakar',
+                icon: '<path d="M17.66,11.2C17.43,10.9 17.15,10.64 16.89,10.38C16.22,9.78 15.46,9.35 14.82,8.72C13.33,7.26 13,4.85 13.95,3C13,3.23 12.17,3.75 11.46,4.32C8.96,6.4 7.92,10.07 9.12,13.22C9.16,13.32 9.2,13.42 9.2,13.55C9.2,13.77 9,13.97 8.8,14.05C8.57,14.15 8.33,14.09 8.14,13.93C8.08,13.88 8.04,13.83 8,13.76C6.87,12.33 6.69,10.28 7.45,8.64C5.78,10 4.87,12.3 5,14.47C5.06,14.97 5.12,15.47 5.29,15.97C5.43,16.57 5.7,17.17 6,17.7C7.08,19.43 8.95,20.67 10.96,20.92C13.1,21.19 15.39,20.8 17.03,19.32C18.86,17.66 19.5,15 18.56,12.72L18.43,12.46C18.22,12 17.66,11.2 17.66,11.2Z"/>',
+                steps: [
+                    'Jauhkan sumber panas. Matikan listrik atau padamkan api pada korban jika perlu.',
+                    'Siram luka bakar dengan air mengalir suhu ruang (bukan air es) selama 15-20 menit.',
+                    'Tutup luka dengan kasa steril atau kain bersih yang tidak lengket.',
+                    'Minum banyak air cair untuk mencegah dehidrasi jika luas luka bakar besar.'
+                ],
+                donts: [
+                    'Jangan oles pasta gigi, mentega, atau bedak. Ini memerangkap panas dan memperparah infeksi.',
+                    'Jangan pecahkan gelembung air (blister) yang terbentuk.'
+                ]
+            },
+            {
+                id: 'sesak',
+                title: 'Tersedak',
+                icon: '<path d="M12,2C14.1,2 16.1,2.8 17.6,4.4C20.7,7.5 20.7,12.5 17.6,15.6L15.6,17.6C14.2,19 12.1,19 10.7,17.6L10,16.9L9.3,17.6C7.9,19 5.8,19 4.4,17.6L2.4,15.6C-0.7,12.5 -0.7,7.5 2.4,4.4C3.9,2.8 5.9,2 8,2C10.1,2 12,2 12,2Z"/>',
+                steps: [
+                    'Tanyakan korban: "Tersedak?" Jika korban bisa mengangguk, batuk, atau berbicara, biarkan dia batuk.',
+                    'Jika korban TIDAK BISA bicara/batuk dan memegang leher, segera lakukan Heimlich.',
+                    'Berdiri di belakang korban. Bungkus lengan Anda di pinggangnya.',
+                    'Buat kepalan tangan satu tangan, letakkan di antara pusar dan tulang dada bawah.',
+                    'Tangkap kepalan tangan itu dengan tangan yang lain. Tarik ke arah dalam dan ke atas dengan cepat dan kuat sampai benda tersangkut keluar.'
+                ],
+                donts: [
+                    'Jangan memukul punggung korban saat dia berdiri tegak.',
+                    'Jangan menyodorkan jari ke tenggorokan secara membabi buta (bisa mendorong benda makin dalam).'
+                ]
+            }
+        ];
+
+        const checklistItems = [
+            { id: 'c1', text: 'Obat Antiseptik (Betadine/Povidone iodine)' },
+            { id: 'c2', text: 'Kasa Steril & Plester Luka' },
+            { id: 'c3', text: 'Perban (Gulung)' },
+            { id: 'c4', text: 'Gunting Kuku/Luka' },
+            { id: 'c5', text: 'Pinset' },
+            { id: 'c6', text: 'Sarung Tangan Lateks' },
+            { id: 'c7', text: 'Thermometer' },
+            { id: 'c8', text: 'Obat Oralit (Elektrolit)' },
+            { id: 'c9', text: 'Minyak Kayu Putih' },
+            { id: 'c10', text: 'Kartu Nomor Darurat' }
+        ];
+
+        const quizQuestions = [
+            {
+                q: "Langkah pertama saat menemukan kecelakaan adalah mengecek...",
+                options: ["Nadi korban", "Bahaya di sekitar", "Identitas korban"],
+                correct: 1
+            },
+            {
+                q: "Jika seseorang mimisan, posisi kepala yang benar adalah...",
+                options: ["Mundur ke belakang", "Condong ke depan", "Miring ke kiri"],
+                correct: 1
+            },
+            {
+                q: "Obat pertama untuk luka bakar ringan adalah...",
+                options: ["Mengoleskan pasta gigi", "Menyiram air mengalir", "Menempel es batu"],
+                correct: 1
+            },
+            {
+                q: "Nomor darurat nasional Indonesia adalah...",
+                options: ["111", "112 / 119", "911"],
+                correct: 1
+            }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const guideContainer = document.getElementById('guideContainer');
+        const checklistContainer = document.getElementById('checklistContainer');
+        const progressBar = document.getElementById('progressBar');
+        const quizContainer = document.getElementById('quizContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        // --- INITIALIZATION ---
+        function init() {
+            renderGuides();
+            renderChecklist();
+            loadProgress();
+            renderQuiz();
+            setupTheme();
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderGuides() {
+            guideContainer.innerHTML = '';
+            guides.forEach(guide => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => openDetail(guide.id);
+                card.innerHTML = `
+                    <svg class="card-icon" viewBox="0 0 24 24">${guide.icon}</svg>
+                    <h3>${guide.title}</h3>
+                `;
+                guideContainer.appendChild(card);
+            });
+        }
+
+        function renderChecklist() {
+            checklistContainer.innerHTML = '';
+            checklistItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'checklist-item';
+                div.onclick = (e) => {
+                    // Prevent triggering when clicking directly on checkbox (handled by default)
+                    if (e.target.type !== 'checkbox') {
+                        const cb = div.querySelector('input');
+                        cb.checked = !cb.checked;
+                        updateProgress();
+                    }
+                };
+
+                const isChecked = localStorage.getItem('checklist_' + item.id) === 'true';
+
+                div.innerHTML = `
+                    <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''} onchange="updateProgress()">
+                    <label for="${item.id}" style="cursor:pointer; flex-grow:1;">${item.text}</label>
+                `;
+                checklistContainer.appendChild(div);
+            });
+            updateProgress();
+        }
+
+        function renderQuiz() {
+            quizContainer.innerHTML = '';
+            document.getElementById('quizResult').classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+
+            quizQuestions.forEach((q, index) => {
+                const qBlock = document.createElement('div');
+                qBlock.style.marginBottom = '1.5rem';
+
+                let optionsHtml = '';
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `<button class="quiz-option" onclick="checkAnswer(this, ${index}, ${optIndex})">${opt}</button>`;
+                });
+
+                qBlock.innerHTML = `
+                    <p style="font-weight:bold; margin-bottom:0.5rem">${index + 1}. ${q.q}</p>
+                    ${optionsHtml}
+                    <div class="quiz-feedback" id="feedback-${index}"></div>
+                `;
+                quizContainer.appendChild(qBlock);
+            });
+        }
+
+        // --- LOGIC FUNCTIONS ---
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            let checkedCount = 0;
+
+            checkboxes.forEach(cb => {
+                localStorage.setItem('checklist_' + cb.id, cb.checked);
+                if (cb.checked) checkedCount++;
+            });
+
+            const percent = Math.round((checkedCount / checkboxes.length) * 100);
+            progressBar.style.width = percent + '%';
+            progressBar.innerText = percent > 0 ? percent + '%' : '';
+
+            // Visual feedback color
+            if (percent === 100) progressBar.style.backgroundColor = 'var(--primary)';
+            else progressBar.style.backgroundColor = 'var(--success)';
+        }
+
+        function loadProgress() {
+            updateProgress(); // Reads from localstorage inside
+        }
+
+        document.getElementById('resetChecklist').onclick = () => {
+            if (confirm('Reset semua checklist kotak P3K?')) {
+                localStorage.clear(); // Clear all local storage
+                renderChecklist();
+            }
+        };
+
+        // Search Feature
+        searchInput.addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(keyword)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+
+        // Navigation
+        function switchTab(tabId, navItem) {
+            // Update Tab UI
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            navItem.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Modal Logic
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('open');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('open');
+        }
+
+        function openDetail(guideId) {
+            const guide = guides.find(g => g.id === guideId);
+            if (!guide) return;
+
+            document.getElementById('detailTitle').innerText = guide.title;
+
+            let stepsHtml = '<ul class="step-list">';
+            guide.steps.forEach(step => {
+                stepsHtml += `<li>${step}</li>`;
+            });
+            stepsHtml += '</ul>';
+
+            let dontsHtml = '';
+            if (guide.donts && guide.donts.length > 0) {
+                dontsHtml = `
+                    <div class="dont-block">
+                        <div class="dont-title">
+                            <svg style="width:20px;height:20px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/></svg>
+                            TINDAKAN YANG SALAH / TIDAK BOLEH DILAKUKAN:
+                        </div>
+                        <ul style="margin-top:0.5rem; margin-left:1rem;">
+                            ${guide.donts.map(d => `<li>${d}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            document.getElementById('detailContent').innerHTML = stepsHtml + dontsHtml;
+            showModal('modal-detail');
+        }
+
+        // Close modal on outside click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('open');
+                }
+            });
+        });
+
+        // Quiz Logic
+        let score = 0;
+        let answered = 0;
+
+        function checkAnswer(btn, qIndex, optIndex) {
+            const feedback = document.getElementById(`feedback-${qIndex}`);
+            const parent = btn.parentElement;
+
+            // Disable all buttons in this question
+            const allBtns = parent.querySelectorAll('.quiz-option');
+            allBtns.forEach(b => b.disabled = true);
+
+            const correctOpt = quizQuestions[qIndex].correct;
+
+            if (optIndex === correctOpt) {
+                btn.style.background = '#d4edda';
+                btn.style.borderColor = '#28a745';
+                feedback.innerText = "Benar!";
+                feedback.className = "quiz-feedback feedback-correct";
+                score++;
+            } else {
+                btn.style.background = '#f8d7da';
+                btn.style.borderColor = '#dc3545';
+                feedback.innerText = "Salah. Jawaban yang benar: " + quizQuestions[qIndex].options[correctOpt];
+                feedback.className = "quiz-feedback feedback-wrong";
+
+                // Highlight correct one
+                allBtns[correctOpt].style.background = '#d4edda';
+            }
+
+            feedback.style.display = 'block';
+            answered++;
+
+            if (answered === quizQuestions.length) {
+                setTimeout(() => {
+                    document.getElementById('quizContainer').classList.add('hidden');
+                    document.getElementById('quizResult').classList.remove('hidden');
+                    document.getElementById('scoreDisplay').innerText = (score / quizQuestions.length) * 100;
+                    score = 0;
+                    answered = 0;
+                }, 1500);
+            }
+        }
+
+        // Dark Mode
+        function setupTheme() {
+            const themeBtn = document.getElementById('themeBtn');
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '<span>☀️</span>';
+            }
+
+            themeBtn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const target = current === 'dark' ? 'light' : 'dark';
+
+                document.documentElement.setAttribute('data-theme', target);
+                localStorage.setItem('theme', target);
+                themeBtn.innerHTML = target === 'dark' ? '<span>☀️</span>' : '<span>🌙</span>';
+            });
+        }
+
+        // Run Init
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+
+</html>
