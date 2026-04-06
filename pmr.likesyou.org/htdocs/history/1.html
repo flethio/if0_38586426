@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Website Resmi Palang Merah Remaja SMK Negeri 4 Banjarmasin. Wadah pemuda humanis, peduli, dan siap bertindak.">
+    <title>PMR SMKN 4 Banjarmasin</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#e63946">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Fonts & Icons setup using system fonts for performance -->
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            /* Warna Identitas PMR & SMK */
+            --primary: #e63946;
+            /* Merah PMR */
+            --primary-dark: #b92b36;
+            --secondary: #1d3557;
+            /* Biru Tua Formal */
+            --accent: #457b9d;
+            /* Biru Muda */
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --bg-hero: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+            --text-main: #1d3557;
+            --text-muted: #6c757d;
+            --text-light: #f1faee;
+
+            --success: #2a9d8f;
+            --warning: #e9c46a;
+            --danger: #d00000;
+
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+            --radius: 16px;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --bg-hero: linear-gradient(135deg, #5c1a1e 0%, #0f172a 100%);
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            --secondary: #457b9d;
+            /* Lighter secondary for dark mode contrast */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+            padding-bottom: 90px;
+            /* Space for bottom nav */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            border-left: 5px solid var(--primary);
+            padding-left: 10px;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.1s, opacity 0.2s;
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--text-muted);
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--bg-card);
+            padding: 0.8rem 1rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .brand-text span {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: block;
+        }
+
+        /* --- HERO SECTION (ANIMATION) --- */
+        .hero-section {
+            background: var(--bg-hero);
+            color: white;
+            padding: 3rem 1.5rem;
+            border-radius: 0 0 30px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        /* Animated Background Pattern */
+        .hero-bg-icon {
+            position: absolute;
+            opacity: 0.1;
+            color: white;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-bg-icon:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .hero-bg-icon:nth-child(2) {
+            bottom: 20%;
+            right: 10%;
+            font-size: 4rem;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .pmr-logo-anim {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* --- CARDS (ACTIVITIES) --- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* --- PROFILE / ABOUT --- */
+        .vision-box {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .mission-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .mission-list li::before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- STRUCTURE --- */
+        .structure-tree {
+            background: var(--bg-card);
+            padding: 2rem 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .role-card {
+            display: inline-block;
+            background: var(--bg-body);
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 0.5rem;
+            border: 1px solid var(--primary);
+            min-width: 140px;
+        }
+
+        .role-name {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .role-real-name {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .connector {
+            width: 2px;
+            height: 20px;
+            background: #ccc;
+            margin: 0 auto;
+        }
+
+        /* --- GALLERY GRID --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1/1;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- CONTACT --- */
+        .contact-info {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            .modal-overlay {
+                align-items: center;
+            }
+
+            .modal-content {
+                border-radius: var(--radius);
+                transform: scale(0.9);
+            }
+
+            .modal-overlay.open .modal-content {
+                transform: scale(1);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #f0f0f0;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        /* --- BOTTOM NAVIGATION --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            z-index: 90;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            flex: 1;
+            padding: 0.3rem;
+            transition: color 0.2s;
+        }
+
+        .nav-item svg {
+            display: block;
+            margin: 0 auto 4px;
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* --- DARK MODE TOGGLE --- */
+        .theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-family: inherit;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <!-- Simple SVG PMR Logo -->
+            <img src="/p3k/aset/gambar/pmr-logo.webp" alt="PMR Logo" width="43">
+            <div class="brand-text">
+                <h1>PMR WIRA</h1>
+                <span>SMKN 4 Banjarmasin</span>
+            </div>
+        </div>
+        <button class="theme-toggle" id="themeBtn" aria-label="Ganti Tema">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </header>
+
+    <main class="container">
+
+        <!-- SECTION: BERANDA -->
+        <section id="home" class="active fade-in">
+            <div class="hero-section">
+                <!-- Animated Background Icons -->
+                <svg class="hero-bg-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                </svg>
+                <svg class="hero-bg-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,13.84 19.38,15.53 18.33,16.91L16.03,14.61C16.63,13.86 17,12.92 17,11.91A5,5 0 0,0 12,6.91A5,5 0 0,0 7,11.91C7,12.92 7.37,13.86 7.97,14.61L5.67,16.91C4.62,15.53 4,13.84 4,12A8,8 0 0,1 12,4M12,9A3,3 0 0,1 15,12C15,12.35 14.94,12.69 14.83,13L12,10.17L9.17,13C9.06,12.69 9,12.35 9,12A3,3 0 0,1 12,9Z" />
+                </svg>
+
+                <!-- Animated Main Logo -->
+                <img class="pmr-logo" src="/p3k/aset/gambar/pmr-logo.webp" alt="PMR Logo" width="90">
+
+                <h1>Siap, Tanggap, Selamatkan</h1>
+                <p style="color: rgba(255,255,255,0.9);">Selamat datang di official page PMR Wira SMKN 4 Banjarmasin.
+                    Membentuk karakter pemuda yang humanis dan berjiwa sosial.</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="/p3k" class="btn"
+                        style="background: white; color: var(--primary); text-decoration: none;">Buka P3K Siaga</a>
+                </div>
+            </div>
+
+            <h2>Berita Terkini</h2>
+            <div id="newsContainer">
+                <!-- Highlight Activity Injected Here -->
+            </div>
+        </section>
+
+        <!-- SECTION: PROFIL -->
+        <section id="profile" class="fade-in hidden">
+            <h2>Tentang Kami</h2>
+            <div class="vision-box">
+                <p style="font-style: italic;">"Palang Merah Remaja adalah wadah pengembangan dan penempaan diri siswa
+                    melalui kegiatan sosial kemanusiaan."</p>
+            </div>
+
+            <div class="vision-box">
+                <h3>Visi</h3>
+                <p>Mewujudkan anggota Palang Merah Remaja yang berkarakter, peduli kemanusiaan, terampil, dan siap
+                    berperan aktif dalam lingkungan sekolah maupun masyarakat.</p>
+
+                <h3 style="margin-top: 1.5rem;">Misi</h3>
+                <ul class="mission-list" style="list-style: none; padding-left: 0;">
+                    <li>Menanamkan nilai kepedulian, kemanusiaan, dan solidaritas kepada seluruh anggota.</li>
+                    <li>Menanamkan nilai-nilai kepedulian sosial, disiplin, dan solidaritas di kalangan remaja.</li>
+                    <li>Mengadakan kegiatan bakti sosial yang bermanfaat bagi lingkungan sekolah dan masyarakat.</li>
+                    <li>Bekerjasama dengan PMI Kota Banjarmasin dalam setiap kegiatan kemanusiaan.</li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3>Sejarah Singkat</h3>
+                <p>PMR SMKN 4 Banjarmasin berdiri sebagai respons atas kebutuhan akan kader siswa yang terampil dalam
+                    menangani situasi darurat di lingkungan sekolah vokasi. Sejak awal berdiri, kami telah mencetak
+                    ratusan alumni yang tanggap bencana dan berjiwa relawan.</p>
+            </div>
+        </section>
+
+        <!-- SECTION: KEGIATAN -->
+        <section id="activities" class="fade-in hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h2>Kegiatan Sosial</h2>
+            </div>
+
+            <div class="search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                </svg>
+                <input type="text" class="search-input" id="searchActivity" placeholder="Cari kegiatan...">
+            </div>
+
+            <div class="grid-cards" id="activityContainer">
+                <!-- Activity Cards Injected via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION: STRUKTUR & GALERI -->
+        <section id="structure" class="fade-in hidden">
+            <h2>Struktur Kepengurusan</h2>
+            <p class="text-sm">Periode 2024/2025</p>
+
+            <div class="structure-tree">
+                <div class="role-card">
+                    <div class="role-name">Wakasek Kesiswaan</div>
+                    <div class="role-real-name">Eka Lisdyawati, M.Pd.</div>
+                </div>
+                <div class="connector"></div>
+                <div class="role-card" style="margin-top:0.5rem;">
+                    <div class="role-name">Pembina UKS</div>
+                    <div class="role-real-name">Winda Hairani, S.Pd.</div>
+                </div>
+                <div class="connector"></div>
+                <div style="margin-top:10px;">
+                    <div class="role-card">
+                        <div class="role-name">Ketua PMR</div>
+                        <div class="role-real-name">Dila</div>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-name">Wakil Ketua</div>
+                        <div class="role-real-name">Nada</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                        <div class="role-card">
+                            <div class="role-name">Sekretaris</div>
+                            <div class="role-real-name"> </div>
+                        </div>
+                        <div class="role-card">
+                            <div class="role-name">Bendahara</div>
+                            <div class="role-real-name">Dewi Sartika</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+                    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                        <div class="role-card" style="margin-top:0.5rem;">
+                            <div class="role-name">Koordinator UKS</div>
+                            <div class="role-real-name">Maya Putri</div>
+                        </div>
+                        <div class="role-card" style="margin-top:0.5rem;">
+                            <div class="role-name">Koordinator Humas</div>
+                            <div class="role-real-name">Maya Putri</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+                    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                        <div class="role-card" style="margin-top:0.5rem;">
+                            <div class="role-name">Koordinator SDM</div>
+                            <div class="role-real-name">Maya Putri</div>
+                        </div>
+                        <div class="role-card" style="margin-top:0.5rem;">
+                            <div class="role-name">Koordinator Somas</div>
+                            <div class="role-real-name">Maya Putri</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 3rem;">Galeri Dokumentasi</h2>
+                <div class="gallery-grid" id="galleryContainer">
+                    <!-- Gallery Items Injected via JS -->
+                </div>
+        </section>
+
+        <!-- SECTION: KONTAK -->
+        <section id="contact" class="fade-in hidden">
+            <h2>Hubungi Kami</h2>
+            <p>Membutuhkan bantuan atau ingin bergabung? Silakan hubungi kami.</p>
+
+            <div class="contact-info">
+                <div class="contact-row">
+                    <div class="contact-icon">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Alamat Sekretariat</strong>
+                        <div class="text-sm">Ruang UKS, SMKN 4 Banjarmasin,<br>Jl. Brigjend H. Hasan Basry,
+                            Banjarmasin.</div>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>WhatsApp Admin</strong>
+                        <div class="text-sm">+62 831-9173-5329 (Kak Dila)</div>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Pembina</strong>
+                        <div class="text-sm">Winda Hairani, S.Pd.</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;"
+                onclick="alert('Sayang Sekalii, Pendaftaran tutup nii sampai demo eskul selanjutnya yaa, stay safe!')">Daftar
+                Anggota Baru</button>
+        </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home', this)">
+            <svg viewBox="0 0 24 24">
+                <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+            </svg>
+            Beranda
+        </div>
+        <div class="nav-item" onclick="switchTab('profile', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+            </svg>
+            Profil
+        </div>
+        <div class="nav-item" onclick="switchTab('activities', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
+            </svg>
+            Kegiatan
+        </div>
+        <div class="nav-item" onclick="switchTab('structure', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
+            </svg>
+            Lainnya
+        </div>
+        <div class="nav-item" onclick="switchTab('contact', this)">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+            </svg>
+            Kontak
+        </div>
+    </nav>
+
+    <!-- MODAL DETAIL KEGIATAN -->
+    <div class="modal-overlay" id="activityModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('activityModal')">&times;</button>
+            <img id="modalImg" src="" alt="Detail"
+                style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:1rem;">
+            <h2 id="modalTitle" style="margin-top:0;">Judul Kegiatan</h2>
+            <span class="card-tag" id="modalDate">Tanggal</span>
+            <div style="margin: 1rem 0;">
+                <p id="modalDesc">Deskripsi...</p>
+            </div>
+            <div class="vision-box" style="border-color: var(--success); padding:1rem;">
+                <h4 style="margin-bottom:0.5rem;">Hasil & Dampak</h4>
+                <p class="text-sm" id="modalImpact">Impact text...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA CONTENT ---
+        const activities = [
+            {
+                id: 'donor',
+                title: 'Aksi Donor Darah Rutin',
+                date: '15 Oktober 2023',
+                category: 'Kesehatan',
+                image: 'https://picsum.photos/seed/pmr1/300/200',
+                desc: 'Kegiatan donor darah bekerjasama dengan UTD PMI Kota Banjarmasin di Aula SMKN 4. Diikuti oleh siswa dan guru.',
+                impact: 'Terhimpun 30 kantong darah yang disalurkan ke PMI Kota Banjarmasin.'
+            },
+            {
+                id: 'simulasi',
+                title: 'Simulasi Penanganan Bencana',
+                date: '28 September 2023',
+                category: 'Pelatihan',
+                image: 'https://picsum.photos/seed/pmr2/300/200',
+                desc: 'Simulasi evakuasi korban kebakaran dan gempa bumi sebagai bagian dari persiapan Bulan Pengurangan Risiko Bencana.',
+                impact: 'Siswa lebih memahami jalur evakuasi dan teknik P3K dasar saat situasi darurat.'
+            },
+            {
+                id: 'sosial',
+                title: 'Bakti Sosial Panti Asuhan',
+                date: '20 Agustus 2023',
+                category: 'Sosial',
+                image: 'https://picsum.photos/seed/pmr3/300/200',
+                desc: 'Kunjungan dan pemberian santunan serta sembako kepada Panti Asuhan Al-Hikmah Banjarmasin.',
+                impact: 'Meningkatkan rasa kepedulian sosial anggota PMR dan menebar senyum bagi adik-adik panti.'
+            },
+            {
+                id: 'persami',
+                title: 'Perkemahan Sabtu Minggu',
+                date: '12-13 Agustus 2023',
+                category: 'Kedisiplinan',
+                image: 'https://picsum.photos/seed/pmr4/300/200',
+                desc: 'Perkemahan gabungan PMR Wira dan Madya untuk melatih kemandirian dan kerjasama tim.',
+                impact: 'Terbentuknya karakter yang disiplin dan solidaritas antar anggota baru dan lama.'
+            }
+        ];
+
+        const galleryImages = [
+            'https://picsum.photos/seed/g1/400/400',
+            'https://picsum.photos/seed/g2/400/400',
+            'https://picsum.photos/seed/g3/400/400',
+            'https://picsum.photos/seed/g4/400/400',
+            'https://picsum.photos/seed/g5/400/400',
+            'https://picsum.photos/seed/g6/400/400'
+        ];
+
+        // --- DOM ELEMENTS ---
+        const activityContainer = document.getElementById('activityContainer');
+        const newsContainer = document.getElementById('newsContainer');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const searchInput = document.getElementById('searchActivity');
+
+        // --- INITIALIZATION ---
+        function init() {
+            renderActivities(activities);
+            renderNews();
+            renderGallery();
+            setupTheme();
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderActivities(data) {
+            activityContainer.innerHTML = '';
+            data.forEach(act => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => openActivityDetail(act.id);
+                card.innerHTML = `
+                    <img src="${act.image}" class="card-img" alt="${act.title}" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">${act.category}</span>
+                        <div class="card-title">${act.title}</div>
+                        <div class="text-sm">${act.date}</div>
+                    </div>
+                `;
+                activityContainer.appendChild(card);
+            });
+        }
+
+        function renderNews() {
+            // Show only the first (latest) activity as news highlight
+            const latest = activities[0];
+            const highlight = document.createElement('div');
+            highlight.className = 'card';
+            highlight.style.marginBottom = '1.5rem';
+            highlight.onclick = () => openActivityDetail(latest.id);
+            highlight.innerHTML = `
+                <img src="${latest.image}" style="width:100%; height:200px; object-fit:cover;" alt="Highlight">
+                <div style="padding:1rem;">
+                    <span class="card-tag" style="margin-bottom:0.5rem; display:inline-block;">Terbaru</span>
+                    <h3 style="font-size:1.2rem;">${latest.title}</h3>
+                    <p style="font-size:0.9rem;">${latest.desc.substring(0, 80)}...</p>
+                    <button class="btn btn-outline" style="font-size:0.8rem; padding:0.4rem 1rem; margin-top:0.5rem;">Baca Selengkapnya</button>
+                </div>
+            `;
+            newsContainer.appendChild(highlight);
+        }
+
+        function renderGallery() {
+            galleryContainer.innerHTML = '';
+            galleryImages.forEach((src, idx) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `<img src="${src}" alt="Gallery ${idx}" loading="lazy">`;
+                galleryContainer.appendChild(item);
+            });
+        }
+
+        // --- SEARCH LOGIC ---
+        searchInput.addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = activities.filter(act =>
+                act.title.toLowerCase().includes(keyword) ||
+                act.category.toLowerCase().includes(keyword)
+            );
+            renderActivities(filtered);
+        });
+
+        // --- NAVIGATION LOGIC ---
+        function switchTab(tabId, navItem) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+
+            // Show target
+            const target = document.getElementById(tabId);
+            target.classList.remove('hidden');
+            target.classList.add('active'); // Triggers fade-in animation
+
+            // Update Nav Icons
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            if (navItem) navItem.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // --- MODAL LOGIC ---
+        function openActivityDetail(id) {
+            const act = activities.find(a => a.id === id);
+            if (!act) return;
+
+            document.getElementById('modalTitle').innerText = act.title;
+            document.getElementById('modalDate').innerText = `${act.date} • ${act.category}`;
+            document.getElementById('modalImg').src = act.image;
+            document.getElementById('modalDesc').innerText = act.desc;
+            document.getElementById('modalImpact').innerText = act.impact;
+
+            document.getElementById('activityModal').classList.add('open');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('open');
+        }
+
+        // Close modal on outside click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('open');
+                }
+            });
+        });
+
+        // --- DARK MODE ---
+        function setupTheme() {
+            const themeBtn = document.getElementById('themeBtn');
+            const themeIcon = document.getElementById('themeIcon');
+            const savedTheme = localStorage.getItem('pmr_theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.innerText = '☀️';
+            }
+
+            themeBtn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const target = current === 'dark' ? 'light' : 'dark';
+
+                document.documentElement.setAttribute('data-theme', target);
+                localStorage.setItem('pmr_theme', target);
+                themeIcon.innerText = target === 'dark' ? '☀️' : '🌙';
+            });
+        }
+
+        // Run Init
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+
+</html>

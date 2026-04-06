@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Website Resmi Palang Merah Remaja SMK Negeri 4 Banjarmasin. Humanis, Peduli, Tanggap.">
+    <title>Palang Merah Remaja - SMKN 4 Banjarmasin</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#FF0000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Font Awesome CDN (Requested) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts: Space Grotesk (Headings) & Inter (Body) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            /* PMR Palette */
+            --primary: #FF3B30;
+            /* Vibrant Red */
+            --secondary: #000000;
+            /* Pure Black */
+            --accent: #FFD60A;
+            /* Warning Yellow */
+            --bg-body: #F2F2F2;
+            --bg-card: #FFFFFF;
+
+            --text-main: #000000;
+            --text-inverse: #FFFFFF;
+            --border-width: 4px;
+            --shadow-hard: 4px 4px 0px 0px var(--secondary);
+            --shadow-hover: 2px 2px 0px 0px var(--secondary);
+            --radius: 0px;
+            /* Brutalism usually has sharp corners, or slightly rounded */
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            --nav-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF453A;
+            --secondary: #FFFFFF;
+            --bg-body: #101010;
+            --bg-card: #1A1A1A;
+            --text-main: #FFFFFF;
+            --text-inverse: #000000;
+            --shadow-hard: 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: calc(var(--nav-height) + 20px);
+            transition: background 0.2s, color 0.2s;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            margin-top: 2px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-sm {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* --- UTILITIES & COMPONENTS --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Neo-Brutalist Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: var(--border-width) solid var(--secondary);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-weight: 800;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: var(--shadow-hard);
+            cursor: pointer;
+            transition: all 0.1s ease;
+            width: 100%;
+            /* Mobile first */
+        }
+
+        @media (min-width: 768px) {
+            .btn {
+                width: auto;
+            }
+        }
+
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--accent);
+            color: black;
+        }
+
+        .btn-outline {
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            position: relative;
+            top: 10px;
+            right: auto;
+            background: var(--secondary);
+            color: var(--bg-card);
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--bg-card);
+            border-bottom: var(--border-width) solid var(--secondary);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .brand-text h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .brand-text span {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: var(--secondary);
+            color: var(--bg-card);
+            padding: 2px 4px;
+        }
+
+        /* --- MARQUEE (Emergency Alert) --- */
+        .marquee-container {
+            background: var(--primary);
+            color: var(--text-inverse);
+            border-bottom: var(--border-width) solid var(--secondary);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            font-weight: bold;
+            font-family: var(--font-heading);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100vw);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .marquee-content {
+                animation-duration: 15s;
+            }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: var(--border-width) solid var(--secondary);
+            background: var(--bg-card);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .hero-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* --- CARDS & GRID --- */
+        .grid-section {
+            padding: 2rem 0;
+        }
+
+        .neo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* --- GALLERY GRID (Google Photos Style) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            padding: 1rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border: 4px solid var(--secondary);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: var(--bg-card);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 6px 6px 0px 0px var(--primary);
+            z-index: 10;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .gallery-item:hover .gallery-img {
+            filter: grayscale(0%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1.5rem 0.8rem 0.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* --- ALBUM SLIDER STYLES --- */
+        .album-slider-container {
+            position: relative;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .album-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+            gap: 0;
+            cursor: grab;
+            border: 3px solid var(--secondary);
+        }
+
+        .album-slider::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari */
+        }
+
+        .slider-item {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: center;
+        }
+
+        .album-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--bg-card);
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+            box-shadow: 2px 2px 0px 0px var(--secondary);
+        }
+
+        .album-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid var(--secondary);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .album-img:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-count-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            border: 2px solid var(--secondary);
+            z-index: 5;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--secondary);
+            box-shadow: var(--shadow-hard);
+            padding: 1rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--secondary);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+            margin-bottom: 1rem;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .card:hover .card-img {
+            filter: grayscale(0%);
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        /* --- STATS / COUNTERS --- */
+        .stats-bar {
+            display: flex;
+            background: var(--secondary);
+            color: var(--bg-card);
+            padding: 1.5rem 1rem;
+            justify-content: space-around;
+            border-bottom: var(--border-width) solid var(--secondary);
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .stats-bar {
+                padding: 1rem;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .stat-item {
+                flex: 1 1 40%;
+            }
+        }
+
+        .stat-item i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- STRUCTURE TREE (Brutalist) --- */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            padding: 2rem 0;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 600px) {
+            .org-chart {
+                align-items: stretch;
+                padding: 1rem 0;
+            }
+
+            .org-connector {
+                display: none;
+            }
+
+            .org-node {
+                margin-bottom: 1rem;
+                min-width: 0 !important;
+                width: 100%;
+            }
+        }
+
+        .org-node {
+            border: var(--border-width) solid var(--secondary);
+            background: var(--bg-card);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-hard);
+            position: relative;
+            z-index: 2;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .member-img {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--secondary);
+            object-fit: cover;
+            background: var(--bg-body);
+            transition: transform 0.3s;
+        }
+
+        .org-node:hover .member-img {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .duo-avatar {
+            margin-right: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .duo-avatar+.duo-avatar {
+            margin-right: 0;
+            z-index: 1;
+        }
+
+        .role-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .role-desc {
+            font-size: 0.75rem;
+            color: var(--text-main);
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            max-width: 180px;
+            line-height: 1.3;
+            font-style: italic;
+        }
+
+        .org-connector {
+            width: var(--border-width);
+            height: 30px;
+            background: var(--secondary);
+        }
+
+        /* --- SEARCH --- */
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            font-family: var(--font-heading);
+            border: var(--border-width) solid var(--secondary);
+            background: var(--bg-card);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .search-input:focus {
+            box-shadow: var(--shadow-hard);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-main);
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            padding: 1rem;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--secondary);
+            box-shadow: 8px 8px 0px 0px var(--primary);
+            width: 100%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        @media (max-width: 600px) {
+            .modal-box {
+                width: 95%;
+                max-height: 85vh;
+            }
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            background: var(--secondary);
+            color: var(--bg-card);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: 2px solid var(--bg-card);
+            color: var(--bg-card);
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- BOTTOM NAV --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: var(--bg-card);
+            border-top: var(--border-width) solid var(--secondary);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 90;
+            box-shadow: 0 -4px 0px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 400px) {
+            .nav-item span {
+                display: none;
+            }
+
+            .nav-item i {
+                font-size: 1.5rem;
+                margin-bottom: 0;
+            }
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 700;
+            flex: 1;
+            height: 100%;
+            transition: background 0.1s;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            background: var(--secondary);
+            color: var(--bg-card);
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--secondary);
+            color: var(--bg-card);
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--bg-card);
+            box-shadow: 4px 4px 0px 0px var(--primary);
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+            pointer-events: none;
+            width: 90%;
+            text-align: center;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* --- EMERGENCY GUIDE STYLES --- */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .emergency-card {
+            border: var(--border-width) solid var(--secondary);
+            background: var(--bg-card);
+            padding: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .emergency-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0px 0px var(--primary);
+        }
+
+        .emergency-card i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .emergency-card h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .guide-steps {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-body);
+            border: 2px solid var(--secondary);
+            align-items: flex-start;
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            border: 2px solid var(--secondary);
+        }
+
+        .emergency-badge {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Toggle Switch for Theme */
+        .theme-switch {
+            background: none;
+            border: 2px solid var(--secondary);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            /* Slight contrast */
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+        }
+
+        [data-theme="dark"] .theme-switch {
+            border-color: var(--bg-card);
+            color: var(--bg-card);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MARQUEE ALERT -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <i class="fa-solid fa-triangle-exclamation"></i> INFO GAWAT DARURAT DI SMKN4BJM: HUBUNGI ATAU SEKRETARIAT
+            PMR |
+            JADWAL EKSTRAKURIKULER: SETIAP HARI KAMIS PUKUL 14.30-16.30 | PENDAFTARAN RELAWAN DIBUKA! <i
+                class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <img src="./aset/gambar/pmr-logo.webp" alt="PMR Logo" width="43">
+            <div class="brand-text">
+                <h1>PMR WIRA</h1>
+                <span>SMKN 4 Banjarmasin</span>
+            </div>
+        </div>
+        <button class="theme-switch" id="themeBtn" aria-label="Ganti Tema">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+
+    <main class="container">
+
+        <!-- SECTION: BERANDA -->
+        <section id="beranda" class="active fade-in">
+            <div class="hero">
+                <h1>Siap. Tanggap. <br><span style="color:var(--primary)">Selamatkan.</span></h1>
+                <p style="margin-top: 1rem;">Membentuk generasi humanis yang siap beraksi untuk kemanusiaan.</p>
+
+                <div class="hero-actions">
+                    <a href="#" onclick="openDonateModal()" class="btn btn-primary">
+                        <i class="fa-solid fa-hand-holding-heart"></i> Latihan Rutin
+                    </a>
+                    <a href="#member" onclick="switchTab('profil')" class="btn btn-secondary">
+                        <i class="fa-solid fa-users"></i> Struktur Organisasi
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Counter -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span class="stat-number">342</span>
+                    <span class="stat-label">Kantong Darah</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span class="stat-number">120</span>
+                    <span class="stat-label">Relawan Aktif</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                    <span class="stat-number">56</span>
+                    <span class="stat-label">Aksi Sosial</span>
+                </div>
+            </div>
+
+            <div class="grid-section">
+                <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:1rem;">
+                    <h2>Kabar Terkini</h2>
+                </div>
+
+                <div class="neo-grid" id="newsContainer">
+                    <!-- Highlight News Injected Here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PROFIL -->
+        <section id="profil" class="fade-in hidden">
+            <h2>Tentang Kami</h2>
+            <div class="card"
+                style="margin-bottom: 2rem; background: var(--secondary); color: var(--text-inverse); transition: background 0.2s, color 0.2s;">
+                <div style="font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem;"><i
+                        class="fa-solid fa-quote-left"></i></div>
+                <p style="font-size: 1.2rem; font-family: var(--font-heading);">"Kemanusiaan tidak mengenal batas. Di
+                    sini kita belajar menjadi pahlawan kecil bagi sesama."</p>
+            </div>
+
+            <div class="neo-grid">
+                <div class="card">
+                    <h3 style="color: var(--primary);"><i class="fa-solid fa-eye"></i> Visi</h3>
+                    <p>Mewujudkan anggota Palang Merah Remaja yang berkarakter, peduli kemanusiaan, terampil, dan siap
+                        berperan aktif dalam lingkungan sekolah maupun masyarakat.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary);"><i class="fa-solid fa-list-check"></i> Misi</h3>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>Menanamkan nilai kepedulian, kemanusiaan, dan solidaritas kepada seluruh anggota.</li>
+                        <li>Meningkatkan pengetahuan serta keterampilan kepalangmerahan dan pertolongan pertama.</li>
+                        <li>Membentuk sikap disiplin, tanggung jawab, dan kerja sama dalam berorganisasi.</li>
+                        <li>Mendukung terciptanya lingkungan sekolah yang sehat, aman, dan siaga.</li>
+                        <li>Berperan aktif dalam kegiatan sosial dan kemanusiaan di masyarakat.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 id="member" style="margin-top: 3rem;">Struktur Organisasi</h2>
+            <p class="text-sm">Periode 2025/2026</p>
+
+            <div class="org-chart">
+                <!-- LEVEL 1: ADVISORY -->
+                <div style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; width:100%;">
+                    <div class="org-node">
+                        <div class="role-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <img src="" class="member-img" alt="Wakasek">
+                        <div class="badge">Wakasek Kesiswaan</div>
+                        <h4>Eka Lisdyawati, M.Pd.</h4>
+                        <p class="role-desc">Penanggung jawab umum kebijakan kesiswaan dan pengembangan organisasi
+                            sekolah.</p>
+                    </div>
+                    <div class="org-node">
+                        <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
+                        <img src="https://image2url.com/r2/default/images/1768889368301-eda7e16f-2b44-4523-a8b0-6840c59b71e5.png"
+                            class="member-img" alt="Pembina">
+                        <div class="badge" style="background:var(--primary)">Pembina UKS</div>
+                        <h4>Winda Hairani, S.Pd.</h4>
+                        <p class="role-desc">Pembimbing teknis operasional dan jembatan antara kurikulum dengan kegiatan
+                            PMR.</p>
+                    </div>
+                </div>
+
+                <div class="org-connector"></div>
+
+                <!-- LEVEL 2: EXECUTIVE -->
+                <div style="display:flex; gap:1.5rem; width:100%; justify-content:center; flex-wrap:wrap;">
+                    <!-- Ketua PMR Node -->
+                    <div class="org-node" style="min-width:220px;">
+                        <div class="role-icon"><i class="fa-solid fa-crown"></i></div>
+                        <img src="" class="member-img" alt="Ketua">
+                        <div class="badge" style="background:var(--primary)">Ketua PMR</div>
+                        <h4>Adilla Hafiza</h4>
+                        <p class="role-desc">Pemimpin eksekutif dan penanggung jawab utama seluruh program kerja PMR
+                            Wira.</p>
+                    </div>
+
+                    <!-- Co-Leadership Wakil Ketua Node -->
+                    <div class="org-node" style="min-width:240px;">
+                        <div class="role-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div style="display:flex; justify-content:center; margin-bottom:0.3rem;">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Wakil 1">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Wakil 2">
+                        </div>
+                        <div class="badge" style="background:var(--primary)">Wakil Ketua</div>
+                        <div style="text-align:center;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 2px;">Siti Fajriyah Qathratunnada</h4>
+                            <h4 style="font-size: 0.85rem;">Assyifa Qolbi</h4>
+                        </div>
+                        <p class="role-desc">Pendamping ketua dalam koordinasi internal dan pengawasan kinerja staf
+                            organisasi.</p>
+                    </div>
+
+                    <!-- Co-Leadership Wakil Ketua Node -->
+                    <div class="org-node" style="min-width:240px;">
+                        <div class="role-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div style="display:flex; justify-content:center; margin-bottom:0.3rem;">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Sekretaris 1">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Sekretaris 2">
+                        </div>
+                        <div class="badge" style="background:var(--primary)">Sekretaris</div>
+                        <div style="text-align:center;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 2px;">Nurul Aminah</h4>
+                            <h4 style="font-size: 0.85rem;">Aminah</h4>
+                        </div>
+                        <p class="role-desc">Penanggung jawab koordinasi internal dan pengawasan kinerja staf
+                            organisasi.</p>
+                    </div>
+
+                    <!-- Co-Leadership Wakil Ketua Node -->
+                    <div class="org-node" style="min-width:240px;">
+                        <div class="role-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div style="display:flex; justify-content:center; margin-bottom:0.3rem;">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Bendahara 1">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Bendahara 2">
+                        </div>
+                        <div class="badge" style="background:var(--primary)">Bendahara</div>
+                        <div style="text-align:center;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 2px;">Nurul Aminah</h4>
+                            <h4 style="font-size: 0.85rem;">Aminah</h4>
+                        </div>
+                        <p class="role-desc">Penanggung jawab koordinasi internal dan pengawasan kinerja staf
+                            organisasi.</p>
+                    </div>
+                </div>
+
+                <div class="org-connector"></div>
+
+                <!-- LEVEL 3: COORDINATORS -->
+                <div style="border-top: 3px solid var(--secondary); width: 80%; margin: 1rem 0; position:relative;">
+                    <div
+                        style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:var(--bg-body); padding:0 1rem; font-family:var(--font-heading); font-weight:800; font-size:0.8rem; text-transform:uppercase;">
+                        Staf Koordinator</div>
+                </div>
+
+                <div class="neo-grid" style="width:100%; text-align:center; margin-top:2rem;">
+                    <div class="card">
+                        <div class="role-icon"><i class="fa-solid fa-kit-medical"></i></div>
+                        <img src="" class="member-img" alt="UKS"
+                            style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
+                        <div class="badge" style="background:var(--accent); margin-bottom: 0.5rem;">Koordinator UKS
+                        </div>
+                        <h4>Ketua: Syailha Nor Rahma</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>Syifa Maurinjia</li>
+                            <li>Nazma Az Zahra</li>
+                            <li>Nahdhah</li>
+                            <li>Andi Nabilla Ramadani</li>
+                            <li>Maulidia Hayuningdiah</li>
+                            <li>Naufa Azmi Khairizqa</li>
+                            <li>Melsia Oktavia</li>
+                        </ol>
+                        <p class="role-desc" style="margin: 0.5rem auto;">Penanggung jawab operasional harian dan
+                            inventaris obat-obatan di UKS.</p>
+                    </div>
+                    <div class="card">
+                        <div class="role-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                        <img src="" class="member-img" alt="Humas"
+                            style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
+                        <div class="badge" style="background:var(--primary); margin-bottom: 0.5rem;">Koordinator Humas
+                        </div>
+                        <h4>Ketua: Aninda Rila Dinisyahara</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>Eva Regina Putri Riyanti</li>
+                            <li>Lisa Erfina</li>
+                            <li>Naylah Azkiya</li>
+                            <li>Rama</li>
+                            <li>Alia Rahmawati</li>
+                            <li>Ferdi Herlino</li>
+                            <li>Almira Fakhriah Hasan</li>
+                        </ol>
+                        <p class="role-desc" style="margin: 0.5rem auto;">Jembatan komunikasi antara PMR dengan pihak
+                            sekolah maupun eksternal.</p>
+                    </div>
+                    <div class="card">
+                        <div class="role-icon"><i class="fa-solid fa-users"></i></div>
+                        <img src="" class="member-img" alt="SDM"
+                            style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
+                        <div class="badge" style="margin-bottom: 0.5rem;">Koordinator PSDM</div>
+                        <h4>Ketua: Muhammad Yorda Herdana</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>A. Ustman Abdullah</li>
+                            <li>Kirani</li>
+                            <li>Halissa Azzahra</li>
+                            <li>Delya Ananda</li>
+                            <li>Lionel Abdi Darma Wicaksono</li>
+                            <li>Selviana Dewi</li>
+                            <li>Muhammad Sultan Ariady</li>
+                        </ol>
+                        <p class="role-desc" style="margin: 0.5rem auto;">Fokus pada pengembangan kapasitas anggota dan
+                            menjaga keharmonisan tim.</p>
+                    </div>
+                    <div class="card">
+                        <div class="role-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <img src="" class="member-img" alt="Somas"
+                            style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
+                        <div class="badge" style="margin-bottom: 0.5rem;">Koordinator Sosma</div>
+                        <h4>Ketua: Muhammad Akeyla</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>Nur Aleesya Nashirah</li>
+                            <li>Nabila Rosydah Zahro</li>
+                            <li>Zahrah Fitri Aisy</li>
+                            <li>Wulandari</li>
+                            <li>Lietya Aisya</li>
+                            <li>Firy al Humairoh Rahmah</li>
+                            <li>Sofha Raihana Kamelia</li>
+                        </ol>
+                        <p class="role-desc" style="margin: 0.5rem auto;">Pelaksana utama program aksi kemanusiaan dan
+                            pengabdian masyarakat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: EDUKASI (EduScope) -->
+        <section id="edukasi" class="fade-in hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+                <h2>EduScope</h2>
+                <span class="badge" style="background: var(--primary); color: white;">PANDUAN DARURAT</span>
+            </div>
+
+            <div class="card"
+                style="margin-bottom: 1.5rem; border-left: 8px solid var(--primary); background: var(--secondary); color: var(--text-inverse); transition: background 0.2s, color 0.2s;">
+                <h3 style="color: var(--primary);"><i class="fa-solid fa-hand-holding-heart"></i> Bersama Kita Peduli
+                </h3>
+                <p style="font-size: 1.1rem; margin-top: 0.5rem; font-weight: 600;">PMR SMKN 4 Banjarmasin hadir untuk
+                    misi kemanusiaan dan pelayanan kesehatan sekolah.</p>
+            </div>
+
+            <div class="emergency-grid">
+                <div class="emergency-card" onclick="openEduDetail('mimisan')">
+                    <i class="fa-solid fa-droplet"></i>
+                    <h4>Mimisan</h4>
+                </div>
+                <div class="emergency-card" onclick="openEduDetail('pingsan')">
+                    <i class="fa-solid fa-user-injured"></i>
+                    <h4>Pingsan</h4>
+                </div>
+                <div class="emergency-card" onclick="openEduDetail('luka_bakar')">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <h4>Luka Bakar</h4>
+                </div>
+                <div class="emergency-card" onclick="openEduDetail('tersedak')">
+                    <i class="fa-solid fa-lungs"></i>
+                    <h4>Tersedak</h4>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Artikel & Materi Lainnya</h3>
+            <div class="neo-grid">
+                <div class="card">
+                    <i class="fa-solid fa-heart-pulse fa-2x" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h4>P3K Dasar</h4>
+                    <p class="text-sm">Materi lengkap pertolongan pertama untuk anggota PMR.</p>
+                    <a href="/p3k" class="btn btn-outline btn-block" style="margin-top: 1rem; font-size: 0.8rem;">Mulai
+                        Belajar</a>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-virus-covid fa-2x" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h4>Kesehatan Remaja</h4>
+                    <p class="text-sm">Informasi pola hidup sehat dan pencegahan penyakit menular.</p>
+                    <a href="/hidup.html" class="btn btn-outline btn-block"
+                        style="margin-top: 1rem; font-size: 0.8rem;">Lihat
+                        Materi</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: GALERI -->
+        <section id="galeri" class="fade-in hidden">
+            <h2>Galeri Foto</h2>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-input" id="searchActivity" placeholder="Cari album atau foto...">
+            </div>
+
+            <div class="gallery-grid" id="activityContainer">
+                <!-- Gallery items Injected JS -->
+            </div>
+        </section>
+
+
+        <!-- SECTION: KONTAK -->
+        <section id="kontak" class="fade-in hidden">
+            <h2>Hubungi Kami</h2>
+            <div class="neo-grid">
+                <div class="card">
+                    <h3>Sekretariat</h3>
+                    <div style="margin: 1rem 0;">
+                        <p><i class="fa-solid fa-location-dot" style="width:25px; color:var(--primary)"></i> Ruang UKS,
+                            SMKN 4 Banjarmasin</p>
+                        <p><i class="fa-solid fa-phone" style="width:25px; color:var(--primary)"></i> +62 831-9173-5329
+                        </p>
+                        <p><i class="fa-solid fa-envelope" style="width:25px; color:var(--primary)"></i>
+                            pmr@smkn4bjm.sch.id</p>
+                    </div>
+                    <a href="https://wa.me/6283191735329" target="_blank" class="btn btn-primary">
+                        <i class="fa-brands fa-whatsapp"></i> Chat WhatsApp
+                    </a>
+                </div>
+
+                <div class="card">
+                    <h3>Bergabung</h3>
+                    <p>Siap menjadi bagian dari pergerakan kemanusiaan di sekolah?</p>
+                    <button class="btn btn-secondary btn-block"
+                        onclick="showToast('Maapp, Pendaftaran ekskul pmr sudaa ditutuppp, silakan tunggu demo ekskul keduwa yaa ^_^')">
+                        Daftar Anggota Baru
+                    </button>
+                    <div class="text-sm" style="margin-top:0.5rem; text-align:center;">
+                        *Pendaftaran dibuka setiap awal semester genap
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>Lokasi</h3>
+                <div
+                    style="background: #ddd; height: 200px; border: 3px solid black; display:flex; align-items:center; justify-content:center; color:#666;">
+                    <!-- Placeholder Map -->
+                    <div style="text-align:center;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.9988223767728!2d114.58754227439209!3d-3.2947890411188894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423a0b07eb9cd%3A0xc5fc816bceb7bcf7!2sSekolah%20Menengah%20Kejuruan%20Negeri%204%20Banjarmasin!5e1!3m2!1sid!2sid!4v1768894818666!5m2!1sid!2sid"
+                            width="260" height="180" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL: EDU DETAIL -->
+    <div class="modal-overlay" id="eduModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="eduModalTitle">Panduan</h3>
+                <button class="close-modal" onclick="closeModal('eduModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="eduModalContent">
+                    <!-- Content Injected JS -->
+                </div>
+                <button class="btn btn-primary btn-block" style="margin-top:1rem;" onclick="closeModal('eduModal')">Saya
+                    Mengerti</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="nav-beranda" onclick="switchTab('beranda')">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </div>
+        <div class="nav-item" id="nav-profil" onclick="switchTab('profil')">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Profil</span>
+        </div>
+        <div class="nav-item" id="nav-edukasi" onclick="switchTab('edukasi')">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>EduScope</span>
+        </div>
+        <div class="nav-item" id="nav-galeri" onclick="switchTab('galeri')">
+            <i class="fa-solid fa-images"></i>
+            <span>Galeri</span>
+        </div>
+        <div class="nav-item" id="nav-kontak" onclick="switchTab('kontak')">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Kontak</span>
+        </div>
+    </nav>
+
+    <!-- MODAL: DETAIL GALERI -->
+    <div class="modal-overlay" id="galleryModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalTitle">Judul Foto</h3>
+                <button class="close-modal" onclick="closeModal('galleryModal')"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalAlbum" class="album-slider-container">
+                    <!-- Images Injected JS -->
+                </div>
+                <div id="sliderDots" class="slider-dots"></div>
+                <span class="badge" id="modalDate">Tanggal</span>
+                <div style="margin: 1rem 0;">
+                    <p id="modalDesc">Deskripsi...</p>
+                </div>
+                <button class="btn btn-primary btn-block" style="margin-top:1rem;"
+                    onclick="closeModal('galleryModal')">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: DONASI (Simple) -->
+    <div class="modal-overlay" id="donateModal">
+        <div class="modal-box" style="border-color: var(--primary);">
+            <div class="modal-header" style="background: var(--primary);">
+                <h3><i class="fa-solid fa-hand-holding-medical"></i> Info Latihan Rutin</h3>
+                <button class="close-modal" onclick="closeModal('donateModal')"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Latihan Rutin:</p>
+                <ul style="margin-left:1.5rem; margin-bottom:1.5rem; font-weight: 600;">
+                    <li>Membawa Seragam Olahraga / PDL Organisasi Untuk Pengajar</li>
+                    <li>Membawa alat tulis & buku catatan</li>
+                    <li>Membawa atribut PMR (Kalo Misal Praktik) Bagi Pengajar</li>
+                    <li>Menjaga Kebersihan & Kedisiplinan</li>
+                </ul>
+                <div style="background: var(--accent); padding:1rem; border: 2px solid black; margin-bottom:1.5rem;">
+                    <strong>Jadwal Berikutnya:</strong><br>
+                    Setiap Hari Kamis<br>
+                    Aula / Lapangan (15.00 - 17.00)
+                </div>
+
+                <p style="margin-bottom: 0.5rem;">Tautan Terkait:</p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <a href="#member" onclick="closeModal('donateModal'); switchTab('profil')" class="badge"
+                        style="text-decoration:none; cursor:pointer; background: var(--secondary); color: var(--bg-card);">
+                        <i class="fa-solid fa-users"></i> Struktur Organisasi
+                    </a>
+                    <a href="#activity" onclick="closeModal('donateModal'); switchTab('galeri')" class="badge"
+                        style="text-decoration:none; cursor:pointer; background: var(--primary); color: white;">
+                        <i class="fa-solid fa-images"></i> Galeri Kegiatan
+                    </a>
+                    <a href="https://wa.me/6281338977042" target="_blank" class="badge"
+                        style="text-decoration:none; cursor:pointer; background: #25D366; color: white;">
+                        <i class="fa-brands fa-whatsapp"></i> Hubungi Pembina
+                    </a>
+                </div>
+
+                <a href="https://skenpat.pages.dev/eskul" class="btn btn-primary btn-block"><i
+                        class="fa-solid fa-calendar-days"></i> Lihat
+                    Jadwal Lengkap</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST MSG -->
+    <div id="toast" class="toast">Pesan notifikasi...</div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA CONTENT ---
+        const activities = [
+            {
+                id: 'latihan',
+                title: 'Latgab (Latihan Gabungan) Pramuka Man 3 Banjarmasin Bersama PMR (Palang Merah Remaja) SMKN 4 Banjarmasin',
+                date: '16 Januari 2026',
+                image: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445098/WhatsApp_Image_2026-02-02_at_21.17.48_1_elixib.jpg',
+                image2: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445098/WhatsApp_Image_2026-02-02_at_21.17.48_tbchum.jpg',
+                image3: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445098/WhatsApp_Image_2026-02-02_at_21.17.48_2_gzls5q.jpg',
+                desc: 'Kegiatan Latihan Gabungan yang bertujuan untuk mempererat tali silaturahmi dan meningkatkan keterampilan pertolongan pertama antar organisasi.',
+            },
+            {
+                id: 'latihan-2',
+                title: 'Latgab (Latihan Gabungan) PMR Wira SMKN 4 Banjarmasin Bersama Pramuka Man 3 Banjarmasin',
+                date: '17 Januari 2026',
+                image: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445097/WhatsApp_Image_2026-02-02_at_21.17.49_nl0mgr.jpg',
+                image2: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445097/WhatsApp_Image_2026-02-02_at_21.17.49_2_allwc1.jpg',
+                image3: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445097/WhatsApp_Image_2026-02-02_at_21.17.49_1_efbbiz.jpg',
+                desc: 'Kegiatan Latihan Gabungan yang bertujuan untuk mempererat tali silaturahmi dan meningkatkan keterampilan pertolongan pertama antar organisasi.',
+            },
+            {
+                id: 'simulasi',
+                title: 'Simulasi Kebakaran',
+                date: '28 September 2023',
+                image: 'https://picsum.photos/seed/pmrneo2/300/200',
+                desc: 'Simulasi evakuasi korban kebakaran dan gempa bumi sebagai bagian dari persiapan Bulan Pengurangan Risiko Bencana.',
+            },
+            {
+                id: 'sosial',
+                title: 'Bakti Sosial Panti',
+                date: '20 Agustus 2023',
+                image: 'https://picsum.photos/seed/pmrneo3/300/200',
+                desc: 'Kunjungan dan pemberian santunan serta sembako kepada Panti Asuhan Al-Hikmah Banjarmasin.',
+            },
+            {
+                id: 'persami',
+                title: 'Persami & LDK',
+                date: '12-13 Agustus 2023',
+                image: 'https://picsum.photos/seed/pmrneo4/300/200',
+                desc: 'Perkemahan gabungan PMR Wira dan Madya untuk melatih kemandirian dan kerjasama tim.',
+            }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const activityContainer = document.getElementById('activityContainer');
+        const newsContainer = document.getElementById('newsContainer');
+        const searchInput = document.getElementById('searchActivity');
+
+        // --- INITIALIZATION ---
+        function init() {
+            renderActivities(activities);
+            renderNews();
+            setupTheme();
+
+            // Handle URL tab
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab') || 'beranda';
+            switchTab(tab, false); // false = don't push state on init
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function renderActivities(data) {
+            activityContainer.innerHTML = '';
+            data.forEach(act => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.onclick = () => openGalleryDetail(act.id);
+
+                let multiIndicator = '';
+                const images = [act.image, act.image2, act.image3].filter(img => img);
+                if (images.length > 1) {
+                    multiIndicator = `<div class="photo-count-badge"><i class="fa-solid fa-images"></i> ${images.length}</div>`;
+                }
+
+                item.innerHTML = `
+                    ${multiIndicator}
+                    <img src="${act.image}" class="gallery-img" alt="${act.title}" loading="lazy">
+                    <div class="gallery-overlay">${act.title}</div>
+                `;
+                activityContainer.appendChild(item);
+            });
+        }
+
+        function renderNews() {
+            const latest = activities[0];
+            const highlight = document.createElement('div');
+            highlight.className = 'card';
+            highlight.style.gridColumn = "1 / -1"; // Make it full width in grid
+            highlight.onclick = () => openGalleryDetail(latest.id);
+            highlight.innerHTML = `
+                <div class="card-content" style="flex-direction:row; gap:1rem; align-items:center; flex-wrap:wrap;">
+                    <img src="${latest.image}" style="width:120px; height:120px; object-fit:cover; border:2px solid var(--secondary);" alt="Highlight">
+                    <div>
+                        <span class="badge" style="background:var(--primary);">Terbaru</span>
+                        <h3 style="font-size:1.2rem; margin-top:0.5rem;">${latest.title}</h3>
+                        <p class="text-sm">${latest.date}</p>
+                        <div style="margin-top:0.5rem; color:var(--primary); font-weight:bold;">
+                            BACA SELENGKAPNYA <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+            newsContainer.appendChild(highlight);
+        }
+
+        // --- SEARCH LOGIC ---
+        searchInput.addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = activities.filter(act =>
+                act.title.toLowerCase().includes(keyword)
+            );
+            renderActivities(filtered);
+        });
+
+        // --- NAVIGATION LOGIC ---
+        function switchTab(tabId, pushState = true) {
+            const sections = {
+                'beranda': 'beranda',
+                'profil': 'profil',
+                'edukasi': 'edukasi',
+                'galeri': 'galeri',
+                'kontak': 'kontak'
+            };
+
+            const targetId = sections[tabId] || 'beranda';
+
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => {
+                sec.classList.add('hidden');
+                sec.classList.remove('active');
+            });
+
+            // Show target section
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('active');
+            }
+
+            // Update Nav UI
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            const activeNav = document.getElementById(`nav-${targetId}`);
+            if (activeNav) activeNav.classList.add('active');
+
+            // Update URL
+            if (pushState) {
+                const newUrl = window.location.pathname + '?tab=' + targetId;
+                window.history.pushState({ tab: targetId }, '', newUrl);
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        // --- MODAL LOGIC ---
+        function openGalleryDetail(id) {
+            const act = activities.find(a => a.id === id);
+            if (!act) return;
+
+            document.getElementById('modalTitle').innerText = act.title;
+            document.getElementById('modalDate').innerText = act.date;
+            document.getElementById('modalDesc').innerText = act.desc;
+
+            const modalAlbum = document.getElementById('modalAlbum');
+            const sliderDots = document.getElementById('sliderDots');
+            modalAlbum.innerHTML = '';
+            sliderDots.innerHTML = '';
+
+            const images = [act.image, act.image2, act.image3].filter(img => img);
+
+            // Create slider
+            const slider = document.createElement('div');
+            slider.className = 'album-slider';
+
+            images.forEach((imgUrl, index) => {
+                // Image item
+                const slide = document.createElement('div');
+                slide.className = 'slider-item';
+                slide.innerHTML = `<img src="${imgUrl}" class="album-img" alt="${act.title}" onclick="window.open('${imgUrl}', '_blank')">`;
+                slider.appendChild(slide);
+
+                // Dot
+                const dot = document.createElement('div');
+                dot.className = index === 0 ? 'slider-dot active' : 'slider-dot';
+                dot.onclick = () => {
+                    slider.scrollTo({
+                        left: slider.offsetWidth * index,
+                        behavior: 'smooth'
+                    });
+                };
+                sliderDots.appendChild(dot);
+            });
+
+            modalAlbum.appendChild(slider);
+
+            // Scroll listener for dots
+            slider.addEventListener('scroll', () => {
+                const index = Math.round(slider.scrollLeft / slider.offsetWidth);
+                const dots = sliderDots.querySelectorAll('.slider-dot');
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+            });
+
+            document.getElementById('galleryModal').classList.add('open');
+        }
+
+        function openDonateModal() {
+            document.getElementById('donateModal').classList.add('open');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('open');
+        }
+
+        // --- EDU MODAL LOGIC ---
+        function openEduDetail(topic) {
+            const title = document.getElementById('eduModalTitle');
+            const content = document.getElementById('eduModalContent');
+
+            const data = {
+                'mimisan': {
+                    title: 'Penanganan Mimisan',
+                    html: `
+                        <div class="emergency-badge">Tindakan Cepat</div>
+                        <ul class="guide-steps">
+                            <li class="guide-step"><div class="step-num">1</div><div><strong>Duduk Tegak:</strong> Jangan berbaring. Condongkan tubuh sedikit ke depan agar darah tidak tertelan.</div></li>
+                            <li class="guide-step"><div class="step-num">2</div><div><strong>Pencet Hidung:</strong> Gunakan ibu jari dan telunjuk untuk memencet bagian lunak hidung selama 5-10 menit.</div></li>
+                            <li class="guide-step"><div class="step-num">3</div><div><strong>Bernapas Lewat Mulut:</strong> Tetap tenang dan bernapaslah melalui mulut selama hidung dipencet.</div></li>
+                            <li class="guide-step"><div class="step-num">4</div><div><strong>Kompres Dingin:</strong> Letakkan kompres dingin di pangkal hidung untuk membantu menyempitkan pembuluh darah.</div></li>
+                        </ul>
+                    `
+                },
+                'pingsan': {
+                    title: 'Penanganan Pingsan',
+                    html: `
+                        <div class="emergency-badge">Keadaan Darurat</div>
+                        <ul class="guide-steps">
+                            <li class="guide-step"><div class="step-num">1</div><div><strong>Baringkan:</strong> Posisikan korban telentang di tempat yang aman dan datar.</div></li>
+                            <li class="guide-step"><div class="step-num">2</div><div><strong>Angkat Kaki:</strong> Tinggikan posisi kaki (sekitar 30cm) agar darah mengalir ke otak.</div></li>
+                            <li class="guide-step"><div class="step-num">3</div><div><strong>Longgarkan Pakaian:</strong> Kendurkan kerah baju, ikat pinggang, atau pakaian ketat lainnya.</div></li>
+                            <li class="guide-step"><div class="step-num">4</div><div><strong>Cek Pernapasan:</strong> Jika tidak sadar lebih dari 1 menit, segera hubungi petugas medis.</div></li>
+                        </ul>
+                    `
+                },
+                'luka_bakar': {
+                    title: 'Penanganan Luka Bakar',
+                    html: `
+                        <div class="emergency-badge">Luka Bakar Ringan</div>
+                        <ul class="guide-steps">
+                            <li class="guide-step"><div class="step-num">1</div><div><strong>Air Mengalir:</strong> Siram bagian yang terbakar dengan air mengalir (suhu ruang) selama 20 menit.</div></li>
+                            <li class="guide-step"><div class="step-num">2</div><div><strong>Lepas Perhiasan:</strong> Segera lepas cincin atau jam tangan sebelum area membengkak.</div></li>
+                            <li class="guide-step"><div class="step-num">3</div><div><strong>Jangan Gunakan Es:</strong> Hindari es batu, mentega, atau pasta gigi karena bisa merusak jaringan.</div></li>
+                            <li class="guide-step"><div class="step-num">4</div><div><strong>Tutup Longgar:</strong> Tutup luka dengan kain bersih atau plastik wrap yang bersih agar tidak infeksi.</div></li>
+                        </ul>
+                    `
+                },
+                'tersedak': {
+                    title: 'Penanganan Tersedak',
+                    html: `
+                        <div class="emergency-badge">Tindakan Heimlich</div>
+                        <ul class="guide-steps">
+                            <li class="guide-step"><div class="step-num">1</div><div><strong>Berdiri di Belakang:</strong> Lingkarkan lengan Anda di pinggang korban.</div></li>
+                            <li class="guide-step"><div class="step-num">2</div><div><strong>Kepalkan Tangan:</strong> Letakkan satu kepalan tangan di atas pusar korban.</div></li>
+                            <li class="guide-step"><div class="step-num">3</div><div><strong>Hentakan Keatas:</strong> Tarik tangan Anda ke dalam dan ke atas dengan hentakan kuat sampai benda keluar.</div></li>
+                            <li class="guide-step"><div class="step-num">4</div><div><strong>Jika Sendiri:</strong> Cari sandaran kursi yang keras dan tekan perut Anda ke bagian atas sandaran tersebut.</div></li>
+                        </ul>
+                    `
+                }
+            };
+
+            const guide = data[topic];
+            if (guide) {
+                title.innerText = guide.title;
+                content.innerHTML = guide.html;
+                document.getElementById('eduModal').classList.add('open');
+            }
+        }
+
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('open');
+                }
+            });
+        });
+
+        // --- TOAST ---
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // --- DARK MODE ---
+        function setupTheme() {
+            const themeBtn = document.getElementById('themeBtn');
+            const themeIcon = themeBtn.querySelector('i');
+            const savedTheme = localStorage.getItem('pmr_theme_neo');
+
+            // Default to light unless explicitly saved as dark
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun';
+                document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#101010');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon';
+                document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#FF3B30');
+            }
+
+            themeBtn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const target = current === 'dark' ? 'light' : 'dark';
+
+                document.documentElement.setAttribute('data-theme', target);
+                localStorage.setItem('pmr_theme_neo', target);
+                themeIcon.className = target === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+
+                const metaColor = target === 'dark' ? '#101010' : '#FF3B30';
+                document.querySelector('meta[name="theme-color"]')?.setAttribute('content', metaColor);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
