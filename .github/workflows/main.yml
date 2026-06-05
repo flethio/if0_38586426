@@ -58,14 +58,15 @@ jobs:
           
           # (Optional) Specify the destination directory on the server
           # default is the root directory
-          server-dir: /  # Adjust this to match your server's directory structure
+          server-dir: /public_html/  # Adjust this to match your server's directory structure
 
           # (Optional) Enable dry-run mode for testing what files would be uploaded
-          # dry-run: false
+          dry-run: true
 
           # (Optional) Define files or folders to exclude from deployment
-          # exclude: |
-          #   **/.git*
+           exclude: |
+             **/.git*
+             **/htdocs/ctc/**
           #   **/node_modules/**
           #   secrets.txt
 
